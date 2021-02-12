@@ -14,6 +14,24 @@ use Sylius\Component\Product\Model\ProductTranslationInterface;
  */
 class Product extends BaseProduct
 {
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $color;
+
+    public function setColor(string $color)
+    {
+        if (in_array($color, ProductColor::getAvailableColors())) {
+            $this->color = $color;
+        }
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
     protected function createTranslation(): ProductTranslationInterface
     {
         return new ProductTranslation();
